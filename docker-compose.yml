@@ -1,0 +1,16 @@
+services:
+  database:
+    build: ./database
+    env_file:
+      - ./database/.env
+    ports:
+      - "5432:5432"
+
+  api:
+    build: ./api
+    env_file:
+      - ./api/.env
+    ports:
+      - "5000:5000"
+    links:
+      - database
