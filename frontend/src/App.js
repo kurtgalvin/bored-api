@@ -43,7 +43,9 @@ export default () => {
 
       <Grid item>
         <PaddedPaper elevation={3}>
-          <User {...state.user} />
+          {state.user.name && (
+            <User {...state.user} />
+          )}
         </PaddedPaper>
       </Grid>
 

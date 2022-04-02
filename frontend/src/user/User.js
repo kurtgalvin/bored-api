@@ -10,9 +10,6 @@ const Title = styled(Item)({
 })
 
 export default ({ name, accessibility, price }) => {
-  if (!name) {
-    return null
-  }
   return (
     <Stack>
       <Title>{name}</Title>
