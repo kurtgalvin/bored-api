@@ -1,17 +1,23 @@
-CREATE TABLE "card" (
+CREATE TABLE "accessibility" (
     id SERIAL PRIMARY KEY,
-    name TEXT
-);
-
-CREATE TABLE "color" (
-    id CHAR(1) UNIQUE,
     name TEXT,
-    sort_order INT,
-    base64 TEXT
+    min FLOAT,
+    max FLOAT,
+    sort_order INT
 );
 
-CREATE TABLE "card_color" (
+CREATE TABLE "price" (
     id SERIAL PRIMARY KEY,
-    card_id INT REFERENCES card(id),
-	color_id CHAR(1) REFERENCES color(id)
+    name TEXT,
+    min FLOAT,
+    max FLOAT,
+    sort_order INT
+);
+
+CREATE TABLE "user" (
+    id SERIAL PRIMARY KEY,
+    name TEXT UNIQUE NOT NULL,
+    accessibility_id INT REFERENCES accessibility(id) NOT NULL,
+	price_id INT REFERENCES price(id) NOT NULL,
+	created_at TIMESTAMP DEFAULT NOW()
 );
