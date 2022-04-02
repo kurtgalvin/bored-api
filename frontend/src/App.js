@@ -42,11 +42,11 @@ export default () => {
       </Grid>
 
       <Grid item>
-        <PaddedPaper elevation={3}>
-          {state.user.name && (
+        {state.user.name && (
+          <PaddedPaper elevation={3}>
             <User {...state.user} />
-          )}
-        </PaddedPaper>
+          </PaddedPaper>
+        )}
       </Grid>
 
       <Grid item>
