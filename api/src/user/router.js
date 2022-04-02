@@ -10,9 +10,9 @@ export default (databaseDriver) => {
   router.get('/', async (req, res) => {
     try {
       const user = await controller.getMostRecentUser()
-      return res.json(user)
+      return res.status(200).json(user)
     } catch(errors) {
-      return res.status(400).json(errors)
+      return res.status(400).json({ errors })
     }
   })
 
@@ -30,7 +30,7 @@ export default (databaseDriver) => {
         const user = await controller.createUser(req.body)
         return res.status(201).json(user)
       } catch(errors) {
-        return res.status(400).json(errors)
+        return res.status(400).json({ errors })
       }
     }
   )

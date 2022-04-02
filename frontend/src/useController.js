@@ -25,7 +25,7 @@ export default () => {
 
   const dispatcher = {
     async getActivityOptions() {
-      const res = await axios.get('/activity/options')
+      const res = await axios.get('/api/activity/options')
       dispatch({
         type: 'getActivityOptions',
         payload: res.data
@@ -33,7 +33,7 @@ export default () => {
     },
 
     async getUser() {
-      const res = await axios.get('/user')
+      const res = await axios.get('/api/user')
       dispatch({
         type: 'getUser',
         payload: res.data
@@ -41,7 +41,7 @@ export default () => {
     },
 
     async getActivity() {
-      const res = await axios.get('/activity')
+      const res = await axios.get('/api/activity')
       dispatch({
         type: 'getActivity',
         payload: res.data
@@ -49,7 +49,7 @@ export default () => {
     },
   
     async createUser({ name, accessibility, price }) {
-      const res = await axios.post('/user', { name, accessibility, price })
+      const res = await axios.post('/api/user', { name, accessibility, price })
       dispatch({
         type: 'getUser',
         payload: res.data
