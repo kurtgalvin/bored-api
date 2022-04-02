@@ -1,6 +1,4 @@
 FROM postgres:13.4
-COPY *.sh /docker-entrypoint-initdb.d/
-
-# RUN mkdir /sql_scripts
+COPY ./start.sh /docker-entrypoint-initdb.d/
 
 COPY / /sql_scripts/
