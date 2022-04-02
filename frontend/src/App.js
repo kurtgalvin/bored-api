@@ -4,6 +4,7 @@ import { styled } from '@mui/system';
 
 import useController from './useController';
 import UserForm from './user/Form'
+import User from './user/User'
 import Activity from './activity/Activity';
 
 const PaddedPaper = styled(Paper)({
@@ -17,6 +18,10 @@ export default () => {
   useEffect(() => {
     dispatcher.getActivityOptions()
   }, [])
+
+  useEffect(() => {
+    dispatcher.getUser()
+  }, [state.activityOptions])
 
   useEffect(() => {
     dispatcher.getActivity()
@@ -35,6 +40,13 @@ export default () => {
           <UserForm onSubmit={dispatcher.createUser} activityOptions={state.activityOptions} />
         </PaddedPaper>
       </Grid>
+
+      <Grid item>
+        <PaddedPaper elevation={3}>
+          <User {...state.user} />
+        </PaddedPaper>
+      </Grid>
+
       <Grid item>
         <PaddedPaper elevation={3}>
           <Grid container justifyContent="center" spacing={1}>

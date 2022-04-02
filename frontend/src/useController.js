@@ -2,14 +2,17 @@ import { useReducer } from "react";
 import axios from 'axios'
 
 const initialState = {
+  activityOptions: { accessibility: [], price: [] },
+  user: { name: '', accessibility: '', price: '' },
   activity: { activity: '', accessibility: '', type: '', participants: '', price: '', link: '' },
-  activityOptions: { accessibility: [], price: [] }
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'getActivityOptions':
       return { ...state, activityOptions: action.payload }
+    case 'getUser':
+      return { ...state, user: action.payload }
     case 'getActivity':
       return { ...state, activity: action.payload }
     default:
@@ -29,6 +32,14 @@ export default () => {
       })
     },
 
+    async getUser() {
+      const res = await axios.get('/user')
+      dispatch({
+        type: 'getUser',
+        payload: res.data
+      })
+    },
+
     async getActivity() {
       const res = await axios.get('/activity')
       dispatch({
@@ -38,7 +49,11 @@ export default () => {
     },
   
     async createUser({ name, accessibility, price }) {
-      await axios.post('/user', { name, accessibility, price })
+      const res = await axios.post('/user', { name, accessibility, price })
+      dispatch({
+        type: 'getUser',
+        payload: res.data
+      })
     }
   }
   return [state, dispatcher]

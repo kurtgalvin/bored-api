@@ -7,8 +7,17 @@ export default (databaseDriver) => {
   const controller = new Controller(databaseDriver)
   const router = Router()
 
+  router.get('/', async (req, res) => {
+    try {
+      const user = await controller.getMostRecentUser()
+      return res.json(user)
+    } catch(errors) {
+      return res.status(400).json(errors)
+    }
+  })
+
   router.post('/', 
-    body('name').exists(),
+    body('name').isLength({ min: 3 }),
     body('accessibility').isIn(['High', 'Medium', 'Low']),
     body('price').isIn(['Free', 'Low', 'High']),
     async (req, res) => {
@@ -19,7 +28,7 @@ export default (databaseDriver) => {
 
       try {
         const user = await controller.createUser(req.body)
-        return res.status(201).json({ user })
+        return res.status(201).json(user)
       } catch(errors) {
         return res.status(400).json(errors)
       }
