@@ -25,7 +25,7 @@ export default () => {
 
   useEffect(() => {
     dispatcher.getActivity()
-  }, [state.activityOptions])
+  }, [state.activityOptions, state.user])
 
   return (
     <Grid container
